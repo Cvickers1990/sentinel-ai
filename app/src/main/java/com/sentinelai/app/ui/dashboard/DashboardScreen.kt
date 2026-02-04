@@ -1,43 +1,34 @@
 package com.sentinelai.app.ui.dashboard
 
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.sentinelai.app.viewmodel.DashboardViewModel
+import kotlinx.coroutines.flow.collectAsState
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(
+    dashboardViewModel: DashboardViewModel = viewModel()
+) {
+    val status by dashboardViewModel.statusText.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "System Overview",
-            style = MaterialTheme.typography.headlineMedium
+            text = "Sentinel AI Status",
+            style = MaterialTheme.typography.headlineSmall
         )
 
-        Card {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text("Device Status")
-                Text("No device connected")
-            }
-        }
+        Text(text = status)
 
-        Card {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text("Security Scan")
-                Text("Scan not started")
-            }
-        }
-
-        Card {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text("Actions")
-                Text("Debloat • Scan • Connect")
-            }
+        Button(onClick = { dashboardViewModel.simulateScan() }) {
+            Text("Run Test Scan")
         }
     }
 }
