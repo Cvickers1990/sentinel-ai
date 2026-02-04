@@ -3,19 +3,29 @@ package com.sentinelai.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
-                Surface {
-                    Text("Sentinel AI initialized")
-                }
-            }
+            SentinelApp()
+        }
+    }
+}
+
+@Composable
+fun SentinelApp() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Sentinel AI") }
+            )
+        }
+    ) { padding ->
+        Surface(modifier = androidx.compose.ui.Modifier.padding(padding)) {
+            // Screen content will go here later
         }
     }
 }
