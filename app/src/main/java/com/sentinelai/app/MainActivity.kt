@@ -25,7 +25,5 @@ fun SentinelApp() {
         }
     ) { padding ->
         Surface(modifier = androidx.compose.ui.Modifier.padding(padding)) {
-            // Screen content will go here later
-        }
-    }
+        com.sentinelai.app.ui.dashboard.DashboardScreen()
 }
